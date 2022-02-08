@@ -3,4 +3,9 @@ describe("Input form", () => {
     it("Navitage to the / route", () => {
         cy.visit(hostUrl);
     });
+
+    it("Input has classname", () => {
+        cy.focused()
+        .should("have.class","new-todo");
+    });
 });
