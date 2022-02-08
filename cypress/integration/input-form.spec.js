@@ -11,6 +11,9 @@ describe("Input form", () => {
 
     it.only("Only execute this test", () => {
         cy.visit(hostUrl);
+        cy.get(".new-todo")
+          .type("Buy some milk") //typing on input field
+          .should("have.value", "Buy some milk");
     });
 
 });
