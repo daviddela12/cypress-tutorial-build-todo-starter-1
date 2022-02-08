@@ -8,4 +8,9 @@ describe("Input form", () => {
         cy.focused()
         .should("have.class","new-todo");
     });
+
+    it.only("Only execute this test", () => {
+        cy.visit(hostUrl);
+    });
+
 });
