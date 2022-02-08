@@ -1,16 +1,15 @@
 const hostUrl = "http://localhost:3030";
 describe("Input form", () => {
-    it("Navitage to the / route", () => {
+    beforeEach(() => {
         cy.visit(hostUrl);
     });
 
     it("Input has classname", () => {
-        cy.focused()
+        cy.get(".new-todo")
         .should("have.class","new-todo");
     });
 
-    it.only("Only execute this test", () => {
-        cy.visit(hostUrl);
+    it("Only execute this test", () => {
         cy.get(".new-todo")
           .type("Buy some milk") //typing on input field
           .should("have.value", "Buy some milk");
