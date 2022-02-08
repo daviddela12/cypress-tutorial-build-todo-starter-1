@@ -6,6 +6,7 @@ import Footer from './Footer'
 
 
 export default class TodoApp extends Component {
+  
   constructor(props) {
     super(props)
 
@@ -13,9 +14,13 @@ export default class TodoApp extends Component {
       currentTodo: '',
       todos: []
     }
+    this.handleNewTodoValue = this.handleNewTodoValue.bind(this);
   }
 
 
+  handleNewTodoValue(event) {
+    this.setState({currentTodo: event.target.value});
+  }
 
   render () {
     return (
@@ -23,7 +28,10 @@ export default class TodoApp extends Component {
         <div>
           <header className="header">
             <h1>todos</h1>
-            <TodoForm currentTodo={this.state.currentTodo}/>
+            <TodoForm 
+              currentTodo = {this.state.currentTodo}
+              handleNewTodoValue = {this.handleNewTodoValue}
+            />
           </header>
           <section className="main">
             <TodoList todos={this.state.todos} />
