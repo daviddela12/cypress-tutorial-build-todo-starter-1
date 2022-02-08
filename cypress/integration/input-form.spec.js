@@ -1,7 +1,6 @@
-const hostUrl = "http://localhost:3030";
 describe("Input form", () => {
     beforeEach(() => {
-        cy.visit(hostUrl);
+        cy.visit("/");
     });
 
     it("Input has classname", () => {
