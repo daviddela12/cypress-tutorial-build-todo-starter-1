@@ -16,8 +16,8 @@ describe('Input form', () => {
     /** END Testing Inputs */
 
     context('Form submittions', () => {
-        it.only('Add new todo task', () => {
-            cy.server();
+        it('Add new todo task', () => {
+            cy.server(); //Start a server to begin routing responses to cy.route()
             cy.route('POST', '/api/todos', {
                 name: 'Buy some eggs',
                 id: 1,
@@ -31,6 +31,25 @@ describe('Input form', () => {
             cy.get('.todo-list li')
               .should('have.length', 1)
               .and('contain', 'Buy some eggs');
+        });
+
+        it.only('Shows an error message on a failed submission', () => {
+            cy.server();
+            cy.route({
+                method: 'POST', 
+                url: '/api/todos', 
+                status: 500,
+                response: {}
+            });
+            cy.get('.new-todo')
+              .type('test{enter}');
+            
+            cy.get('.todo-list li')
+              .should('not.exist');
+
+            cy.get('.error')
+              .should('be.visible');
+
         });
     });
 });
