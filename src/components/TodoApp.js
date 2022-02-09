@@ -15,6 +15,7 @@ export default class TodoApp extends Component {
       currentTodo: '',
       todos: []
     }
+
     this.handleNewTodoValue = this.handleNewTodoValue.bind(this);
     this.handleSaveToDo = this.handleSaveToDo.bind(this);
   }
@@ -26,10 +27,12 @@ export default class TodoApp extends Component {
 
   handleSaveToDo(event) {
     event.preventDefault();
+    console.log(this.state.currentTodo);
     const newTodo = {name: this.state.currentTodo, isComplete: false};
     saveToDo(newTodo).then((data) => {
       this.setState({
-        todos: this.state.todos.concat(data)
+        todos: this.state.todos.concat(data),
+        currentTodo: ''
       });
     });
   }
