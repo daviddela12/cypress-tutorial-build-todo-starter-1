@@ -16,8 +16,10 @@ describe('Input form', () => {
     /** END Testing Inputs */
 
     context('Form submittions', () => {
-        it('Add new todo task', () => {
+        beforeEach(() => {
             cy.server(); //Start a server to begin routing responses to cy.route()
+        });
+        it('Add new todo task', () => {
             cy.route('POST', '/api/todos', {
                 name: 'Buy some eggs',
                 id: 1,
@@ -33,8 +35,7 @@ describe('Input form', () => {
               .and('contain', 'Buy some eggs');
         });
 
-        it.only('Shows an error message on a failed submission', () => {
-            cy.server();
+        it('Shows an error message on a failed submission', () => {
             cy.route({
                 method: 'POST', 
                 url: '/api/todos', 
