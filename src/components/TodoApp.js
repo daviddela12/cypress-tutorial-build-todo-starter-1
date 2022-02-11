@@ -3,14 +3,13 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
-import { saveToDo } from '../lib/service'
+import { saveToDo, loadToDos } from '../lib/service'
 
 
 export default class TodoApp extends Component {
   
   constructor(props) {
     super(props)
-
     this.state = {
       currentTodo: '',
       todos: []
@@ -18,6 +17,16 @@ export default class TodoApp extends Component {
 
     this.handleNewTodoValue = this.handleNewTodoValue.bind(this);
     this.handleSaveToDo = this.handleSaveToDo.bind(this);
+  }
+ 
+  componentDidMount() {
+    console.log("componentDidMount");
+    loadToDos()
+    .then(({data}) => { 
+      console.log(data);
+      this.setState({todos: data})
+    })
+    .catch(() => this.setState({error: true}));
   }
 
 
@@ -27,9 +36,8 @@ export default class TodoApp extends Component {
 
   handleSaveToDo(event) {
     event.preventDefault();
-    console.log(this.state.currentTodo);
     const newTodo = {name: this.state.currentTodo, isComplete: false};
-    saveToDo(newTodo).then((data) => {
+    saveToDo(newTodo).then(({data}) => {
       this.setState({
         todos: this.state.todos.concat(data),
         currentTodo: ''
@@ -43,7 +51,7 @@ export default class TodoApp extends Component {
         <div>
           <header className="header">
             <h1>todos</h1>
-            {this.state.error ? <span class="error">Oh no!</span> : null}
+            {this.state.error ? <span className="error">Oh no!</span> : null}
             <TodoForm 
               currentTodo = {this.state.currentTodo}
               handleSaveToDo = {this.handleSaveToDo}

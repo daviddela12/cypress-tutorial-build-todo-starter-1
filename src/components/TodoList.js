@@ -13,5 +13,5 @@ const TodoItem = props =>
 
 export default props =>
   <ul className="todo-list">
-    {props.todos.map(todo => <TodoItem key={todo.data.id} {...todo.data}/>)}
+    {props.todos.map(todo => <TodoItem key={todo.id} {...todo}/>)}
   </ul>
