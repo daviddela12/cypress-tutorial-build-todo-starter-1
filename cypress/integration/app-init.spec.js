@@ -1,13 +1,13 @@
 describe('App initialization', () => {
     it('Loads todos on page load', () => {
-        cy.seedAndVisit();
+        cy.seedAndVisit('fixture:todos');
 
         cy.get('.todo-list li')
           .should('have.length', 4);
 
     });
 
-    it.only("Display error message on failure", () => {
+    it("Display error message on failure", () => {
         /** Aqui le dices:
          * Server: Prepara la aplicacion
          * Route: Cuando la aplicacion llame aqui mockealo por esta respuesta. En este caso, cuando haga un GET a /api/todos que se devuelva status 500 y respuesta vacia

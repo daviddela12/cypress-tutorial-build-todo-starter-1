@@ -1,11 +1,11 @@
 describe('Input form', () => {
     beforeEach(() => {
-        cy.visit('/');
+        cy.seedAndVisit();
     });
     /** Testing Inputs */
     it('Input has classname', () => {
         cy.get('.new-todo')
-        .should('have.class','new-todo');
+          .should('have.class','new-todo');
     });
 
     it('Only execute this test', () => {
