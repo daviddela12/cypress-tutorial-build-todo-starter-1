@@ -20,6 +20,9 @@ describe('Input form', () => {
             cy.server(); //Start a server to begin routing responses to cy.route()
         });
         it('Add new todo task', () => {
+             /** Aqui le dices:
+             * Route: Cuando la aplicacion llame aqui mockealo por esta respuesta. En este caso, cuando haga un POST a /api/todos, que la respuesta sea Buy some eggs...y demás info
+             */
             cy.route('POST', '/api/todos', {
                 name: 'Buy some eggs',
                 id: 1,
