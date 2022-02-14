@@ -33,7 +33,7 @@ describe("Todo Items behavoir", () => {
             response: {}
         })
         cy.get('.todo-list li')
-          .as('todoList');
+          .as('todoList'); //con el alias conseguimos crear un shortname para identificarlo más rápido.
         
         cy.get('@todoList')
           .first()
