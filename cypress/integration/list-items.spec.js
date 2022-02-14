@@ -46,4 +46,35 @@ describe("Todo Items behavoir", () => {
           .and('not.contain', 'Milk');
           
     });
+
+    it.only('Marks an incomplete item complete', () => {
+        cy.fixture('todos')
+          .then((todos) => {
+            const target = Cypress._.head(todos); //obtiene el primer elemento del array
+            cy.route({
+                method: 'PUT',
+                url: `/api/todos/${target.id}`,
+                response: Cypress._.merge(target, {isComplete: true})
+            });
+          });
+
+        cy.get('.todo-list li')
+          .first()
+          .as('firstToDo');
+        
+        cy.get('@firstToDo')
+          .find('.toggle')
+          .click();
+        
+        cy.get('@firstToDo')
+          .and('have.class', 'completed');
+
+        cy.get('@firstToDo')
+          .find('.toggle')
+          .should('be.checked')
+
+        cy.get('.todo-count')
+          .should('contain', 2);
+
+    });
 });

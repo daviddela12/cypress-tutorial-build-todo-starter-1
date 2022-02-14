@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 import Footer from './Footer'
-import { saveToDo, loadToDos, deleteToDo } from '../lib/service'
+import { saveToDo, loadToDos, deleteToDo, updateToDo } from '../lib/service'
 
 
 export default class TodoApp extends Component {
@@ -18,6 +18,7 @@ export default class TodoApp extends Component {
     this.handleNewTodoValue = this.handleNewTodoValue.bind(this);
     this.handleSaveToDo = this.handleSaveToDo.bind(this);
     this.handleDeleteToDo = this.handleDeleteToDo.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
  
   componentDidMount() {
@@ -52,6 +53,31 @@ export default class TodoApp extends Component {
     });
   }
 
+  handleToggle(id) {
+    const target = this.state.todos.find(t => t.id === id);
+    const updatedTarget = {
+      ...target,
+      isComplete: !target.isComplete
+    }
+    
+    updateToDo(updatedTarget)
+    .then(({data}) => {
+      const targetIndex = this.state.todos.findIndex(
+        t => t.id === data.id
+      );
+      /** REFACTORING WITH MAP
+      const updateToDos = [
+        ...this.state.todos.slice(0, targetIndex),
+        data,
+        ...this.state.todos.slice(targetIndex+1)
+      ];
+      */
+     const updateToDos = this.state.todos.map( t => t.id === data.id ? data : t );
+
+      this.setState({todos: updateToDos})
+    });
+  }
+
   render () {
     const remainingTodos = this.state.todos.filter(t => !t.isComplete).length;
     return (
@@ -67,7 +93,7 @@ export default class TodoApp extends Component {
             />
           </header>
           <section className="main">
-            <TodoList todos={this.state.todos} handleDeleteToDo={this.handleDeleteToDo} />
+            <TodoList todos={this.state.todos} handleDeleteToDo={this.handleDeleteToDo} handleToggle={this.handleToggle}/>
           </section>
           <Footer remainingTodos={remainingTodos}/>
         </div>
