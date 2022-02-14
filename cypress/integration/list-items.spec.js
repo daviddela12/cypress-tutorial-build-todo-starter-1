@@ -6,7 +6,7 @@ describe("Todo Items behavoir", () => {
      * Despues buscamos la clase .toggle que es el input checkbox
      * Comprobamos que está chequeado el input. Significa que está completada
      */
-    it.only("Properly display completed items", () => {
+    it("Properly display completed items", () => {
         cy.seedAndVisit('fixture:todos');
         cy.get('.todo-list li')
           .filter('.completed')
@@ -14,5 +14,11 @@ describe("Todo Items behavoir", () => {
           .and('contain', 'Eggs')
           .find('.toggle')
           .should('be.checked');
+    });
+
+    it("Show correct todos left on footer", () => {
+        cy.seedAndVisit('fixture:todos');
+        cy.get('.todo-count')
+          .should('contain', 3);
     });
 });
