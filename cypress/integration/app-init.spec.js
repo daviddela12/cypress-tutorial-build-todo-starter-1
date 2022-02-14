@@ -6,7 +6,6 @@ describe('App initialization', () => {
           .should('have.length', 4);
 
     });
-
     it("Display error message on failure", () => {
         /** Aqui le dices:
          * Server: Prepara la aplicacion

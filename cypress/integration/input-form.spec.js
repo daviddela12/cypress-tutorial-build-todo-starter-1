@@ -47,7 +47,7 @@ describe('Input form', () => {
             });
             cy.get('.new-todo')
               .type('test{enter}');
-            
+              
             cy.get('.todo-list li')
               .should('not.exist');
 
