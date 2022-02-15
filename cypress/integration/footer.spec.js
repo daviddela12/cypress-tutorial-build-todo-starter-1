@@ -16,29 +16,19 @@ describe("Footer", () => {
               .should('contain', '3 todos left');
         });
 
-        it("show Active todos", () => {
-            cy.contains('Active')
-              .click();
-            
-            cy.get('.todo-list li')
-              .should('have.length', 3);
-            
-        });
-        it("show Completed todos", () => {
-            cy.contains('Completed')
-              .click();
-            
-            cy.get('.todo-list li')
-              .should('have.length', 1)
-        });
-
-
-        it("show All todos", () => {
-            cy.contains('All')
-              .click();
-            
-            cy.get('.todo-list li')
-              .should('have.length', 4)
+        it("Handle footer filters todos", () => {
+            const filters = [
+                {filter: 'Active', expectedLength: 3},
+                {filter: 'Completed', expectedLength: 1},
+                {filter: 'All', expectedLength: 4},
+            ]
+            cy.wrap(filters).each( (filter) => {
+                cy.contains(filter.filter)
+                  .click();
+              
+                cy.get('.todo-list li')
+                  .should('have.length', filter.expectedLength);
+            })
         });
     });
 });
