@@ -23,12 +23,17 @@ describe("Footer", () => {
             cy.get('.todo-list li')
               .should('have.length', 3);
             
+        });
+        it("show Completed todos", () => {
             cy.contains('Completed')
               .click();
             
             cy.get('.todo-list li')
               .should('have.length', 1)
+        });
 
+
+        it("show All todos", () => {
             cy.contains('All')
               .click();
             
