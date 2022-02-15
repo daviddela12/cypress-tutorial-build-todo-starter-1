@@ -5,7 +5,9 @@ describe("Footer", () => {
             cy.get('.todo-count')
               .should("contain", "1 todo left")
         });
+    });
 
+    context("with multiples todos", () => {
         it("display two singular todos in count", () => {
             cy.seedAndVisit([
                 {id: 1, name: "Buy chocolate", isComplete: false},
