@@ -21,7 +21,19 @@ describe("Footer", () => {
               .click();
             
             cy.get('.todo-list li')
-              .should('have.length', 3)
+              .should('have.length', 3);
+            
+            cy.contains('Completed')
+              .click();
+            
+            cy.get('.todo-list li')
+              .should('have.length', 1)
+
+            cy.contains('All')
+              .click();
+            
+            cy.get('.todo-list li')
+              .should('have.length', 4)
         });
     });
 });
