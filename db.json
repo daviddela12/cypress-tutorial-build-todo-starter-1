@@ -2,7 +2,7 @@
   "todos": [
     {
       "name": "Buy milk",
-      "isComplete": true,
+      "isComplete": false,
       "id": 1
     }
   ]
