@@ -8,9 +8,15 @@ describe("The application loads", () => {
     })
     it("Add new item", () => {
       cy.visit('/')
+      cy.server()
+      cy.route('POST', '/api/todos')
+        .as('create')
+
       cy.get('.new-todo')
         .type('Buy milk{enter}')
       
+      cy.wait('@create')
+
       cy.get('.todo-list li')
         .should('have.length', 1)
     })
