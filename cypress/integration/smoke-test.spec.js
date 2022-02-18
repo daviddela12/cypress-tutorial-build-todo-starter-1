@@ -67,8 +67,8 @@ describe("The application loads", () => {
     })
 
     it('Toggles todos', () => {
-      const clickAndWait = ($el) => {
-        cy.wrap($el)
+      const clickAndWait = (el) => {
+        cy.wrap(el)
           .as('item')
           .find('.toggle')
           .click()
@@ -82,8 +82,8 @@ describe("The application loads", () => {
   
       cy.get('.todo-list li')
       /** todo checked */
-        .each($el => {
-          clickAndWait($el)
+        .each(el => {
+          clickAndWait(el)
           cy.get('@item')
             .should('have.class', 'completed')
         }) /** todo unchecked */
