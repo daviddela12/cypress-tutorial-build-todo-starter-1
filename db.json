@@ -1,19 +1,24 @@
 {
   "todos": [
     {
-      "name": "Buy milk",
-      "isComplete": false,
-      "id": 1
+      "id": 7,
+      "name": "Buy Milk T",
+      "isComplete": false
     },
     {
-      "name": "Buy eggs",
-      "isComplete": false,
-      "id": 2
+      "id": 8,
+      "name": "Buy Eggs T",
+      "isComplete": false
     },
     {
-      "name": "Buy chocolate",
-      "isComplete": false,
-      "id": 3
+      "id": 9,
+      "name": "Buy Bread T",
+      "isComplete": false
+    },
+    {
+      "id": 10,
+      "name": "Make French Toast T",
+      "isComplete": false
     }
   ]
 }
